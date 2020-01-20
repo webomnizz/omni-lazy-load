@@ -7,7 +7,7 @@
  * @wordpress-plugin
  * Plugin Name:       Omni Lazy Load
  * Plugin URI:        https://webomnizz.com/wordpress-plugins/omni-lazy-load-image/
- * Description:       WordPress lazy loader for Images to boost your website performance.
+ * Description:       WordPress lazy loader for Images and IFrames to boost your website performance.
  * Version:           1.0.0
  * Author:            Jogesh
  * Author URI:        https://webomnizz.com/

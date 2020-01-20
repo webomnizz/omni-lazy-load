@@ -1,5 +1,5 @@
 # Omni Lazy Load
-The best plugin to for Images to boost WordPress Performance.
+The best plugin to for Images and IFrames to boost WordPress Performance.
 
 ## Installation
 

@@ -95,22 +95,56 @@ class Omni_Lazyload_Public {
         $dom = new DOMDocument();
         @$dom->loadHTML($content);
 
+        // Apply Lazy Image
         foreach ($dom->getElementsByTagName('img') as $node) { 
+            $this->lazy_image( $node );
+        }
 
-            $oldsrc = $node->getAttribute('src');
-            $old_srcset = $node->getAttribute('srcset');
-            $old_classes = $node->getAttribute('class');
-
-            $node->setAttribute("data-src", $oldsrc );
-            $node->setAttribute("data-srcset", $old_srcset);
-
-            $node->removeAttribute("srcset");
-            $node->removeAttribute("src");
-
-            $node->setAttribute("class", trim($old_classes) . " lazyload");
+        // Apply Lazy IFrame
+        foreach ($dom->getElementsByTagName('iframe') as $node) { 
+            $this->lazy_iframe( $node );
         }
 
         $newHtml = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $dom->saveHTML()));
         return $newHtml;
+    }
+
+    /**
+     * Apply Lazyloading on image
+     *
+     * @param object $node
+     * @param string $class
+     * 
+     * @since 1.0.0
+     * @return void
+     */
+    private function lazy_image( $node, $class = 'lazyload' ) {
+
+        $oldsrc = $node->getAttribute('src');
+        $old_srcset = $node->getAttribute('srcset');
+        $old_classes = $node->getAttribute('class');
+
+        $node->setAttribute("data-src", $oldsrc );
+        $node->setAttribute("data-srcset", $old_srcset);
+
+        $node->removeAttribute("srcset");
+        $node->removeAttribute("src");
+
+        $node->setAttribute("class", trim($old_classes) . " {$class}");
+    }
+
+    /**
+     * Apply Lazyloading on iframe
+     *
+     * @param object $node
+     * @param string $class
+     * 
+     * @since 1.0.0
+     * @return void
+     */
+    private function lazy_iframe( $node, $class = 'lazyload' ) {
+
+        $old_classes = $node->getAttribute('class');
+        $node->setAttribute("class", trim($old_classes) . " {$class}");
     }
 }
